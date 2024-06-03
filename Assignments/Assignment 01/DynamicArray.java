@@ -41,7 +41,7 @@ public class DynamicArray {
     } // default constructor
 
     /**
-     * Adds a new item to array data after ensurig there is 
+     * Adds a new item to array data after ensuring there is 
      * sufficient room by resizing the array if necessary.
      * @param string new item to add to array
      */
@@ -54,5 +54,17 @@ public class DynamicArray {
         this.data[this.position] = string;
         this.position++;
     } // method add
+
+    public resize(int new_size) { // Initialize new method with a new size which is doubled
+        int new_size = (int DEFAULT_SIZE * 2); // Take the default size and double it
+    }
+
+    public contains(String new_string) { // Method for removing identical strings
+        if (String new_string == this.data) { // if statement for if the new string is already in the data
+            return true // returns true if string is in data
+        }
+        else {
+            return false // returns false if string isn't in data 
+        }
     
 } // class DynamicArray
