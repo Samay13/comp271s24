@@ -1,0 +1,72 @@
+public class Sorting271 {// The class
+    
+    // Method for merging 
+    public int[] merge(int[] left, int[] right) {// Initialize method
+        int[] final_array = new int[left.length + right.length];// Initialize the final array which is the length of the "left array" plus the length of the "right array"
+        int i = 0;// Initialize i which is used later(used for left)
+        int j = 0;// Initialize j which is used later(used for right)
+        int k = 0;// Initialize k which is used later(used for final)
+        
+        // Merges the arrays while there are elements in both arrays
+        while (i < left.length && j < right.length) {// Initialize while loop for while i and j are less than the length of the left and right arrays
+            if (left[i] <= right[j]) {// Start if statement for when the left array is less than the right array
+                final_array[k++] = left[i++];// Takes the value from the left array and puts it in the final array
+            } else {
+                final_array[k++] = right[j++];// Does the same thing but to the right array
+            }
+        }
+        
+        // Copies remaining elements of the left array if there are any
+        while (i < left.length) {// While loop for when there are remaining values in the left array
+            final_array[k++] = left[i++];// Adds that value from the left array to the final array
+        }
+        
+        // Copies remaining elements of the right array if there are any
+        while (j < right.length) {// While loop for when there are remaining values in the left array
+            final_array[k++] = right[j++];// Adds that value from the left array to the final array
+        }
+        
+        return final_array;// Returns the new and final array
+    } //Method for merging
+    
+    // Method for sorting
+    public int[] sort(int[] array) { //Initialize method
+        if (array.length <= 1) { //If statement for the length of the array is either equal to 1 or it's empty
+            return array; //Returns the array only if it is already 1 value or less
+        }
+        
+        int n = array.length; //Initializes variable for the array's length
+        int[] temporaryArray = new int[n]; //Creates a temporary array with the original's length
+        
+        
+        for (int size = 1; size < n; size *= 2) {// For loop that doubles the size of the array
+            for (int leftStart = 0; leftStart < n - size; leftStart += 2 * size) { //Breaks up the array into 2 halves
+                int mid = leftStart + size - 1; //Initializes the middle of the array
+                int rightEnd = Math.min(leftStart + 2 * size - 1, n - 1); //Initializes the end of the array
+                
+                // Merge the two halves
+                int[] left = new int[mid - leftStart + 1]; //Takes the left array
+                int[] right = new int[rightEnd - mid]; //Takes the right array
+
+    
+                int[] mergedArray = merge(left, right); //Merges the array
+            }
+        }
+        return mergedArray; //Returns the new array
+    } //Method sort
+
+    // Main method
+    public static void main(String[] args) { //Initailize the method
+        int[] array = {10, 8, 5, 3}; //Initialize the array
+        System.out.println("Original array: "); 
+        for (int num : array) { //Goes through the values in the array
+            System.out.print(num + " "); //Prints each value of the original array
+        }
+        
+        int[] sortedArray = sorting.sort(array); //Sorts and merges the array
+        System.out.println("\nSorted array: ");
+        for (int num : sortedArray) { //Goes through the values of the sorted array
+            System.out.print(num + " ");  //Prints each value of the sorted array
+        } 
+    } //Main Method
+}// Sorting 271 class
