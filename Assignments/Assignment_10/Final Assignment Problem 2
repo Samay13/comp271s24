@@ -1,0 +1,92 @@
+public class TrainLine { //Initialize Class
+    private Station head; //The head of the linked list
+
+    //A class for what a station is in the train line
+    private class Station { //Initialize Class for station
+        String name; //Initialize string for the name of the station
+        Station next; // Initialize variable for going the next station in the trainline
+
+        Station(String name) {// Brings up the station
+            this.name = name; //Initializes the name of the station
+            this.next = null; //Initializes the next station as null
+        }
+    }//Class for a station
+
+    //Constructor for TrainLine
+    public TrainLine() {
+        this.head = null; //Initializes the head of the train line as null
+    }//Trainline method
+
+    //Method to add a station to the train line
+    public void add(String stationName) {
+        if (head == null) { //Says that if the train line is empty
+            head = new Station(stationName); //Creates a new station and sets it as the head
+        } else { //Says that if the train line isn't empty
+            Station current = head; //Initializes current to start from the head station
+            while (current.next != null) { //Traverses to the end of the trainline
+                current = current.next; //Moves to the next station
+            }
+            current.next = new Station(stationName); //Addd the new station at the end
+        }
+    }//Method to add a station
+
+    //Method to list all the stations
+    public String listStations() {
+        if (head == null) { //Says that if the train line is empty
+            return "The line is empty."; //Returns that the line is empty
+        }
+
+        StringBuilder stationsList = new StringBuilder(); //Create a StringBuilder to store the station names
+        Station current = head; //Start from the head station
+        while (current != null) {//Goes through each station in the train line
+            stationsList.append(current.name).append("\n"); //Adds the current station name to the list
+            current = current.next; //Moves to the next station
+        }
+        return stationsList.toString(); //Changes the list to a string and returns it
+    }//Method to list the stations
+
+    //Method to reverser the trainline
+    public String reverseListStations() {
+        if (head == null) { //Says if the train line is empty
+            return "The line is empty."; //Return that the line is empty
+        }
+
+        //Reverse the linked list
+        Station prev = null; //Initialize the previous station as null
+        Station current = head; //Start from the head
+        while (current != null) { //While loop that goes through the train line until it reaches null
+            Station next = current.next; //Stores the next station
+            current.next = prev; //Reverses the list
+            prev = current; //Moves the previous pointer to the current station
+            current = next; //Moves onto the next station
+        }
+        head = prev; //Set the head to the new first station
+
+        // List stations in the new reversed order
+        StringBuilder stationsList = new StringBuilder(); //Create a StringBuilder to store the station names
+        current = head; //Start from the new head
+        while (current != null) { //Go through the reversed train line
+            stationsList.append(current.name).append("\n"); //Add the current station name to the StringBuilder
+            current = current.next; //Moves onto the next station
+        }
+        return stationsList.toString(); //Convert the StringBuilder into a string and returns it
+    }//Method for reversing trainline
+
+    //Main Method
+    public static void main(String[] args) {
+        TrainLine lincolnService = new TrainLine(); //Creates a new TrainLine
+        lincolnService.add("Chicago"); //Adds all the stations to the trainline
+        lincolnService.add("Summit"); 
+        lincolnService.add("Joliet"); 
+        lincolnService.add("Dwight"); 
+        lincolnService.add("Pontiac"); 
+        lincolnService.add("Bloomington"); 
+        lincolnService.add("Lincoln"); 
+        lincolnService.add("Springfield"); 
+        lincolnService.add("Carlinville"); 
+        lincolnService.add("Alton"); 
+        lincolnService.add("Saint Louis"); 
+
+        System.out.println(lincolnService.reverseListStations()); // print the stations in reverse order
+    }//Main method
+}//Trainline Class
